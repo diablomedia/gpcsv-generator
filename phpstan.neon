@@ -1,0 +1,8 @@
+parameters:
+    # checkMissingIterableValueType: false
+    level: 8
+    paths:
+        - ./
+    excludes_analyse:
+        - %rootDir%/../../../vendor/*
+    ignoreErrors:

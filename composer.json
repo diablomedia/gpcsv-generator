@@ -1,0 +1,40 @@
+{
+    "name": "diablomedia/gpcsv-generator",
+    "type": "library",
+    "description": "Library to assist with generation of CashPro Global Payments GPCSV files",
+    "keywords": ["gpcsv"],
+    "homepage": "https://github.com/diablomedia/gpcsv-generator",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Ari Pringle",
+            "email": "ari@diablomedia.com",
+            "homepage": "https://diablomedia.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "GPCSV\\": "src/GPCSV",
+            "GPCSV\\Tests\\": "tests"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "diablomedia/phpunit-pretty-printer": "^4.0",
+        "phpstan/phpstan": "^0.12.28",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "vimeo/psalm": "^3.11",
+        "psalm/plugin-phpunit": "^0.10.1"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test-with-coverage": "phpunit --coverage-clover=clover.xml",
+        "phpstan": "phpstan analyze -c phpstan.neon --no-progress --ansi",
+        "psalm": "psalm --show-info=false",
+        "style-fix": "php-cs-fixer fix",
+        "style-check": "php-cs-fixer fix --dry-run -vv"
+    }
+}
