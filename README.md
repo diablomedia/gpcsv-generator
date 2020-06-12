@@ -11,23 +11,27 @@ composer require diablomedia/gpcsv
 ### Code
 ```php
 <?php
-$csv = new GPCSV();
-$csv->setDestinationCountry($country);
+$payment = new GPCSV\Payment();
+$payment->setDestinationCountry($country);
 // Set other values...
+
+$csv = new GPCSV\File();
+$csv->addPayment($payment);
+// Add other payments...
 
 echo (string) $csv;
 ```
 
 ## Options
 
-By default, the library will automatically strip unsupported characters from values that are sent to it. If you would prefer it to throw an error instead, you can disable the autoClean option:
+By default, the Payment class will automatically strip unsupported characters from values that are sent to it. If you would prefer it to throw an error instead, you can disable the autoClean option:
 
 ```php
 <?php
-$csv = new GPCSV(['autoClean' => false]);
+$payment = new Payment(['autoClean' => false]);
 
 // or:
 
-$csv = new GPCSV();
-$csv->setOptionAutomaticallyCleanFields(false);
+$payment = new Payment();
+$payment->setOptionAutomaticallyCleanFields(false);
 ```

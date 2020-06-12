@@ -7,6 +7,12 @@ use GPCSV\Exception\InvalidValueException;
 
 class Email extends Field
 {
+    // A different character set is allowed for email, let filter_var take care of it
+    public function cleanValue(string $value): string
+    {
+        return trim($value);
+    }
+
     public function validateValue(string $value): bool
     {
         if (filter_var($value, FILTER_VALIDATE_EMAIL) === false) {

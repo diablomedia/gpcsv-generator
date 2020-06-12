@@ -12,10 +12,13 @@ abstract class Field
     protected $name = '';
 
     /** @var string */
+    protected $label = '';
+
+    /** @var string */
     protected $validCharacterRegex = "|[^A-Za-z0-9/\-?:()\.,'+ ]|";
 
     /** @var string */
-    protected $validationRegex = '/^[A-Za-z0-9].*[A-Za-z0-9]$/';
+    protected $validationRegex = '/^[A-Za-z0-9].*[A-Za-z0-9\.]$/';
 
     /** @var string */
     protected $validationInvalidErrorMessage = 'Value must begin and end with alphanumeric characters';
@@ -40,12 +43,17 @@ abstract class Field
 
     public function cleanValue(string $value): string
     {
-        $value = preg_replace($this->validCharacterRegex, '', $value);
+        $value = preg_replace($this->validCharacterRegex, '', trim($value));
         if (!is_string($value)) {
             return '';
         }
 
         return $value;
+    }
+
+    private function getFriendlyName(): string
+    {
+        return empty($this->label) ? $this->name : $this->label;
     }
 
     /** @return true */
@@ -54,7 +62,7 @@ abstract class Field
         if (is_int($this->minLength) && strlen($value) < $this->minLength) {
             throw new StringLengthException(sprintf(
                 '%s must be at least %d characters',
-                $this->name,
+                $this->getFriendlyName(),
                 $this->minLength
             ));
         }
@@ -62,13 +70,13 @@ abstract class Field
         if (is_int($this->maxLength) && strlen($value) > $this->maxLength) {
             throw new StringLengthException(sprintf(
                 '%s must be no more than %d characters',
-                $this->name,
+                $this->getFriendlyName(),
                 $this->maxLength
             ));
         }
 
         if (!preg_match($this->validationRegex, $value)) {
-            throw new InvalidValueException($this->name . ': ' . $this->validationInvalidErrorMessage);
+            throw new InvalidValueException($this->getFriendlyName() . ': ' . $this->validationInvalidErrorMessage);
         }
 
         return true;
