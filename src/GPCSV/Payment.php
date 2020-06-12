@@ -7,7 +7,7 @@ use GPCSV\Exception\UnknownOptionException;
 
 class Payment
 {
-        /**
+    /**
      * Fields flagged as mandatory in all cases. Conditionally-required fields are not currently evaluated
      * @var array<string>
      */
@@ -739,13 +739,13 @@ class Payment
     private function validateRequiredFields(): void
     {
         foreach ($this->requiredFields as $field) {
-            if ($field === '') {
+            if ($this->{$field} === '') {
                 throw new RequiredFieldException($field . ' is required');
             }
         }
     }
 
-    public function __toString(): string
+    public function getCsvString(): string
     {
         $this->validateRequiredFields();
 
@@ -755,11 +755,6 @@ class Payment
         }
         $csvRow = substr($csvRow, 0, -1); // trim trailing comma
 
-        if ($csvRow === false) {
-            throw new Exception('Error generating CSV row');
-        }
-
         return $csvRow;
     }
-
 }

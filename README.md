@@ -1,5 +1,5 @@
 # gpcsv-generator
-Library to assist with generation of CashPro Global Payments GPCSV files
+Library to assist with the generation of CashPro Global Payments GPCSV files
 
 ## Usage
 
@@ -19,7 +19,7 @@ $csv = new GPCSV\File();
 $csv->addPayment($payment);
 // Add other payments...
 
-echo (string) $csv;
+echo $csv->getCsvString();
 ```
 
 ## Options

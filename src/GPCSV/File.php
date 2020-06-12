@@ -2,8 +2,6 @@
 
 namespace GPCSV;
 
-use GPCSV\Payment;
-
 class File
 {
     /**
@@ -17,7 +15,7 @@ class File
     }
 
     /**
-     * @param array<\GPCSV\Payment> $payments 
+     * @param array<\GPCSV\Payment> $payments
      */
     public function addPayments(array $payments): void
     {
@@ -26,11 +24,11 @@ class File
         }
     }
 
-    public function __toString(): string
+    public function getCsvString(): string
     {
         $csvBody = '';
         foreach ($this->payments as $payment) {
-            $csvBody .= (string)$payment . "\n";
+            $csvBody .= $payment->getCsvString() . "\n";
         }
 
         return $csvBody;

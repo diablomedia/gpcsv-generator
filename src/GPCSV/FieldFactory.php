@@ -2,8 +2,6 @@
 
 namespace GPCSV;
 
-use GPCSV\Field;
-
 class FieldFactory
 {
     // If not specified here, the Standard field type will be used

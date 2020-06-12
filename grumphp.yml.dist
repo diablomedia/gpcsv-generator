@@ -16,6 +16,6 @@ grumphp:
             always_execute: true
         clover_coverage:
             clover_file: clover.xml
-            level: 90
+            level: 16
         composer_script:
-            script: psalm-check
+            script: psalm

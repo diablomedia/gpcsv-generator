@@ -1,7 +1,7 @@
 {
     "name": "diablomedia/gpcsv-generator",
     "type": "library",
-    "description": "Library to assist with generation of CashPro Global Payments GPCSV files",
+    "description": "Library to assist with the generation of CashPro Global Payments GPCSV files",
     "keywords": ["gpcsv"],
     "homepage": "https://github.com/diablomedia/gpcsv-generator",
     "license": "LGPL-3.0-or-later",
@@ -13,11 +13,16 @@
         }
     ],
     "require": {
+        "ext-filter": "*",
         "php": "^7.2"
     },
     "autoload": {
         "psr-4": {
-            "GPCSV\\": "src/GPCSV",
+            "GPCSV\\": "src/GPCSV"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "GPCSV\\Tests\\": "tests"
         }
     },
