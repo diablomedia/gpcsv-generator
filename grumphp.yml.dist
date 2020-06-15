@@ -8,7 +8,6 @@ grumphp:
             allow_risky: true
             config: .php_cs
         phpstan:
-            level: 7
             configuration: phpstan.neon
         phpunit:
             metadata:
@@ -16,6 +15,6 @@ grumphp:
             always_execute: true
         clover_coverage:
             clover_file: clover.xml
-            level: 16
+            level: 80
         composer_script:
             script: psalm

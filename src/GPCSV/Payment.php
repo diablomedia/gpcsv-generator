@@ -497,7 +497,7 @@ class Payment
     }
     public function setIntermediaryBankID(string $val): void
     {
-        $field = FieldFactory::createField('IntermediaryBankID');
+        $field = FieldFactory::createField('intermediaryBankID');
 
         $this->intermediaryBankID = $this->cleanAndValidate($field, $val);
     }
@@ -587,7 +587,7 @@ class Payment
     }
     public function setTemplateCode(string $val): void
     {
-        $field = FieldFactory::createField('tmeplateCode');
+        $field = FieldFactory::createField('templateCode');
 
         $this->templateCode = $this->cleanAndValidate($field, $val);
     }
