@@ -1,0 +1,20 @@
+# grumphp.yml
+grumphp:
+    tasks:
+        composer:
+            strict: true
+        composer_require_checker: ~
+        phpcsfixer2:
+            allow_risky: true
+            config: .php_cs
+        phpstan:
+            configuration: phpstan.neon
+        phpunit:
+            metadata:
+                priority: 100
+            always_execute: true
+        clover_coverage:
+            clover_file: clover.xml
+            level: 80
+        composer_script:
+            script: psalm
