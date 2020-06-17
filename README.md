@@ -1,4 +1,7 @@
 # gpcsv-generator
+![Build](https://github.com/diablomedia/gpcsv-generator/workflows/Build/badge.svg)
+[![codecov](https://codecov.io/gh/diablomedia/gpcsv-generator/branch/master/graph/badge.svg)](https://codecov.io/gh/diablomedia/gpcsv-generator)
+
 Library to assist with the generation of CashPro Global Payments GPCSV files
 
 ## Usage
