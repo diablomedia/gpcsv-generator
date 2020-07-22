@@ -30,7 +30,7 @@
         "phpunit/phpunit": "^8.5.5",
         "diablomedia/phpunit-pretty-printer": "^4.0",
         "phpstan/phpstan": "0.12.33",
-        "friendsofphp/php-cs-fixer": "2.16.3",
+        "friendsofphp/php-cs-fixer": "2.16.4",
         "vimeo/psalm": "3.12.2",
         "psalm/plugin-phpunit": "^0.10.1",
         "maglnet/composer-require-checker": "^2.1",
