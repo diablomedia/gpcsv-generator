@@ -1,56 +1,16 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace GPCSV\Tests;
 
-use PHPUnit\Framework\TestCase;
 use GPCSV\Exception;
 use GPCSV\Exception\RequiredFieldException;
 use GPCSV\Payment;
+use PHPUnit\Framework\TestCase;
 
 class PaymentTest extends TestCase
 {
-    public function testExceptionIsThrownIfRequiredFieldsAreMissing(): void
-    {
-        $this->expectException(RequiredFieldException::class);
-
-        $payment = new Payment([]);
-        $payment->getCsvString();
-    }
-
-    public function testUsingUnsupportedReceivingBankIDFieldThrowsException(): void
-    {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('receivingBankID is not currently a supported field');
-
-        $payment = new Payment([]);
-        $payment->setReceivingBankID('test');
-    }
-
-    public function testUsingUnsupportedReservedFieldThrowsException(): void
-    {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('reserved is not currently a supported field');
-
-        $payment = new Payment([]);
-        $payment->setReserved('test');
-    }
-
-    public function testCsvOutputWithRequiredFields(): void
-    {
-        $payment = new Payment([]);
-        $payment->setDestinationCountry('US');
-        $payment->setPaymentType('URG');
-        $payment->setDebitAccountNumber('123');
-        $payment->setCurrency('USD');
-        $payment->setBeneficiaryName('Test Name');
-        $payment->setBeneficiaryAddress('Test Address');
-        $payment->setBeneficiaryCity('Test City');
-        $payment->setBeneficiaryCountry('US');
-
-        $expected = 'US,URG,,,,123,,,USD,,,,,,,,Test Name,Test Address,Test City,,US,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,';
-        $this->assertEquals($expected, $payment->getCsvString());
-    }
-
     public function testCsvOutputWithAllSupportedFields(): void
     {
         $payment = new Payment([]);
@@ -123,5 +83,47 @@ class PaymentTest extends TestCase
 
         $expected = 'US,URG,senderref,relatedref,01012020,debitacct,123.45,456.78,USD,GB,Originator Name,Originator Acct,Originator Address,Originator City,GB,Beneficiary Account,Beneficiary Name,Beneficiary Address,Beneficiary City,Beneficiary Postal Code,UK,Beneficiary Bank ID,Beneficiary Info Line1,Beneficiary Info Line2,Beneficiary Info Line3,Beneficiary Info Line4,Intermediary Bank ID,,/ReceiverInformationLine1,//ReceiverInformationLine2,//ReceiverInformationLine3,//ReceiverInformationLine4,test@test.com,Notes,1,SHA,User Defined Field 1,User Defined Field 2,User Defined Field 3,User Defined Field 4,User Defined Field 5,Template Code,Template Name,,Purpose of Payment,Beneficiary Advising,System Field 1,System Field 2,System Field 3,System Field 4,System Field 5,System Field 6,System Field 7,System Field 8,System Field 9,System Field 10,System Field 11,System Field 12,System Field 13,System Field 14,System Field 15,System Field 16,System Field 17,System Field 18,System Field 19,System Field 20';
         $this->assertEquals($expected, $payment->getCsvString());
+    }
+
+    public function testCsvOutputWithRequiredFields(): void
+    {
+        $payment = new Payment([]);
+        $payment->setDestinationCountry('US');
+        $payment->setPaymentType('URG');
+        $payment->setDebitAccountNumber('123');
+        $payment->setCurrency('USD');
+        $payment->setBeneficiaryName('Test Name');
+        $payment->setBeneficiaryAddress('Test Address');
+        $payment->setBeneficiaryCity('Test City');
+        $payment->setBeneficiaryCountry('US');
+
+        $expected = 'US,URG,,,,123,,,USD,,,,,,,,Test Name,Test Address,Test City,,US,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,';
+        $this->assertEquals($expected, $payment->getCsvString());
+    }
+
+    public function testExceptionIsThrownIfRequiredFieldsAreMissing(): void
+    {
+        $this->expectException(RequiredFieldException::class);
+
+        $payment = new Payment([]);
+        $payment->getCsvString();
+    }
+
+    public function testUsingUnsupportedReceivingBankIDFieldThrowsException(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('receivingBankID is not currently a supported field');
+
+        $payment = new Payment([]);
+        $payment->setReceivingBankID('test');
+    }
+
+    public function testUsingUnsupportedReservedFieldThrowsException(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('reserved is not currently a supported field');
+
+        $payment = new Payment([]);
+        $payment->setReserved('test');
     }
 }

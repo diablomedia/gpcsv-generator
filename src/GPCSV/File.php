@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace GPCSV;
 
@@ -8,7 +10,7 @@ class File
      * @var array<Payment>
      */
     private $payments = [];
-    
+
     public function addPayment(Payment $payment): void
     {
         $this->payments[] = $payment;
