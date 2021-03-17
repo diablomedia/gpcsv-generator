@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace GPCSV\Field;
 
-use GPCSV\Field;
 use GPCSV\Exception\InvalidValueException;
+use GPCSV\Field;
 
 class ValueList extends Field
 {

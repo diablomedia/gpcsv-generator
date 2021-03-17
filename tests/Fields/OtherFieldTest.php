@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace GPCSV\Tests\Field;
 
-use PHPUnit\Framework\TestCase;
-use GPCSV\Field;
 use GPCSV\Exception;
+use GPCSV\Field;
+use PHPUnit\Framework\TestCase;
 
 class OtherFieldTest extends TestCase
 {
@@ -17,16 +19,31 @@ class OtherFieldTest extends TestCase
         $field->validateValue('alpha');
     }
 
+    public function testDecimalFieldValidationSucceedsWithDecimalValue(): void
+    {
+        $field = new Field\Decimal(['name' => 'testdecimal']);
+        $this->assertTrue($field->validateValue('12.34'));
+    }
+
     public function testDecimalFieldValidationSucceedsWithNumericValue(): void
     {
         $field = new Field\Decimal(['name' => 'testdecimal']);
         $this->assertTrue($field->validateValue('12'));
     }
 
-    public function testDecimalFieldValidationSucceedsWithDecimalValue(): void
+    public function testEmailFieldValidationFailsWithNonEmailValue(): void
     {
-        $field = new Field\Decimal(['name' => 'testdecimal']);
-        $this->assertTrue($field->validateValue('12.34'));
+        $this->expectException(Exception\InvalidValueException::class);
+        $this->expectExceptionMessage('testemail must be in valid email address format');
+
+        $field = new Field\Email(['name' => 'testemail']);
+        $field->validateValue('teststring');
+    }
+
+    public function testEmailFieldValidationSucceedsWithEmailValue(): void
+    {
+        $field = new Field\Email(['name' => 'testemail']);
+        $this->assertTrue($field->validateValue('test@test.com'));
     }
 
     public function testNumericFieldFailsWithNonNumericValue(): void
@@ -53,21 +70,6 @@ class OtherFieldTest extends TestCase
         $this->assertTrue($field->validateValue('12'));
     }
 
-    public function testEmailFieldValidationFailsWithNonEmailValue(): void
-    {
-        $this->expectException(Exception\InvalidValueException::class);
-        $this->expectExceptionMessage('testemail must be in valid email address format');
-
-        $field = new Field\Email(['name' => 'testemail']);
-        $field->validateValue('teststring');
-    }
-
-    public function testEmailFieldValidationSucceedsWithEmailValue(): void
-    {
-        $field = new Field\Email(['name' => 'testemail']);
-        $this->assertTrue($field->validateValue('test@test.com'));
-    }
-
     public function testReceiver1FieldValidationFailsWithoutSlashPrefix(): void
     {
         $this->expectException(Exception\InvalidValueException::class);
@@ -91,7 +93,7 @@ class OtherFieldTest extends TestCase
         $field = new Field\Receiver2(['name' => 'testreceiver2']);
         $field->validateValue('teststring');
     }
-    
+
     public function testReceiver2FieldValidationFailsWithSingleSlashPrefix(): void
     {
         $this->expectException(Exception\InvalidValueException::class);

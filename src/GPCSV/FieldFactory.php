@@ -1,10 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace GPCSV;
 
 class FieldFactory
 {
     // If not specified here, the Standard field type will be used
+
     /** @var array<string, array<string, array<int, string>|int|string>> */
     public static $fieldDefinitions = [
         'destinationCountry'          => ['class' => Field\Standard::class, 'label' => 'Destination Country', 'minLength' => 2, 'maxLength' => 2],

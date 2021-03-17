@@ -1,33 +1,35 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace GPCSV;
 
-use GPCSV\Exception\UnknownOptionException;
 use GPCSV\Exception\InvalidValueException;
 use GPCSV\Exception\StringLengthException;
+use GPCSV\Exception\UnknownOptionException;
 
 abstract class Field
 {
     /** @var string */
+    protected $label = '';
+
+    /** @var null|int */
+    protected $maxLength;
+
+    /** @var null|int */
+    protected $minLength;
+
+    /** @var string */
     protected $name = '';
 
     /** @var string */
-    protected $label = '';
-
-    /** @var string */
-    protected $validCharacterRegex = "|[^A-Za-z0-9/\-?:()\.,'+ ]|";
+    protected $validationInvalidErrorMessage = 'Value must begin and end with alphanumeric characters';
 
     /** @var string */
     protected $validationRegex = '/^[A-Za-z0-9].*[A-Za-z0-9\.]$/';
 
     /** @var string */
-    protected $validationInvalidErrorMessage = 'Value must begin and end with alphanumeric characters';
-
-    /** @var null|int */
-    protected $minLength;
-
-    /** @var null|int */
-    protected $maxLength;
+    protected $validCharacterRegex = "|[^A-Za-z0-9/\-?:()\.,'+ ]|";
 
     /** @param array<string, int|string>|array<string, array<int, string>|string> $options */
     public function __construct(array $options)
@@ -49,11 +51,6 @@ abstract class Field
         }
 
         return $value;
-    }
-
-    private function getFriendlyName(): string
-    {
-        return empty($this->label) ? $this->name : $this->label;
     }
 
     /** @return true */
@@ -80,5 +77,10 @@ abstract class Field
         }
 
         return true;
+    }
+
+    private function getFriendlyName(): string
+    {
+        return empty($this->label) ? $this->name : $this->label;
     }
 }
