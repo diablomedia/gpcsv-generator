@@ -10,7 +10,7 @@ jobs:
     build:
         name: PHP ${{ matrix.php-versions }} ${{ matrix.composer-args }}
         strategy:
-            fast-fail: false
+            fail-fast: false
             matrix:
                 operating-system: [ubuntu-latest]
                 php-versions: ['7.2', '7.3', '7.4']
