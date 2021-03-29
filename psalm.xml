@@ -2,9 +2,9 @@
 <psalm
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="./vendor/vimeo/psalm/src/config.xsd"
-    totallyTyped="true"
     allowStringToStandInForClass="true"
     errorBaseline="psalm-baseline.xml"
+    errorLevel="1"
 >
     <projectFiles>
         <directory name="src"/>
